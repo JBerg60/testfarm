@@ -22,6 +22,4 @@ systemctl enable ntp
 timedatectl set-local-rtc true
 timedatectl set-timezone Europe/Berlin
 
-mkdir /opt/testfarm/scripts
-
 # it is up to the caller to do a reboot!
