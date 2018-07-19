@@ -6,16 +6,11 @@ ENDPOINT="http://manufacturing.riedel.net/files/testfarm"
 cd $TARGET
 cronscript=$TARGET/watchdog.sh
 
-if [ ! -f /opt/testfarm/firstboot.sh ]; then
-   curl "$ENDPOINT/firstboot.sh" > $TARGET/firstboot.sh
-   chmod +x $TARGET/firstboot.sh
+if [ ! -d $TARGET/log ]; then
+   mkdir $TARGET/log
    $TARGET/firstboot.sh
    reboot
 fi
-
-#download the watchdog and install in cron
-curl "$ENDPOINT/watchdog.sh" > $cronscript
-chmod +x $cronscript
 
 # remove old watchdog -v = reverse -w wildcard
 crontab -l | grep -v -w "watchdog.sh" | crontab -
