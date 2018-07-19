@@ -1,12 +1,16 @@
 #!/bin/bash
 
+# the repo needs the have 3 files hardcoded:
+# - this file (boot.sh)
+# - bootscript.sh => is run once on a vergin device
+# - scripts/device-register.py => is run after boot to register the device in the portal
+
 TARGET="/opt/testfarm"
-ENDPOINT="http://manufacturing.riedel.net/files/testfarm"
 
 if [ ! -d $TARGET/log ]; then
    mkdir $TARGET/log
    chmod +x $TARGET/firstboot.sh
-   bash $TARGET/firstboot.sh
+   . $TARGET/firstboot.sh
    reboot
 fi
 
@@ -27,5 +31,5 @@ crontab -l | grep -v -w "watchdog.sh" | crontab -
 
 timedatectl set-ntp 1
 
-curl "$ENDPOINT/scripts/device-register.py" > $TARGET/scripts/device-register.py
+# register our device with the portal
 python3 $TARGET/scripts/device-register.py
