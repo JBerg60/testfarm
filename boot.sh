@@ -6,7 +6,7 @@ ENDPOINT="http://manufacturing.riedel.net/files/testfarm"
 if [ ! -d $TARGET/log ]; then
    mkdir $TARGET/log
    chmod +x $TARGET/firstboot.sh
-   $TARGET/firstboot.sh
+   bash $TARGET/firstboot.sh
    reboot
 fi
 

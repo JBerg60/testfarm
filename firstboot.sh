@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo 'root:Riedel1!' | chpasswd
 echo 'pi:Riedel1!' | chpasswd
 
@@ -11,7 +12,6 @@ echo "alias ls='ls -al --color=auto'" >> /root/.profile
 
 echo 'MAILTO=""' | crontab -
 
-#apt-get -y update
 #apt-get -y upgrade
 
 apt-get install -y openocd
