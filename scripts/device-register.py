@@ -27,7 +27,7 @@ result = subprocess.run(
     ['hostnamectl', 'status'], stdout=subprocess.PIPE).stdout.decode('latin1')
 lines = result.split('\n')
 values = list(map(lambda line: line.split(':'), lines))
-data = {}
+data = {} 
 
 for value in values:
     if not len(value) == 2:
@@ -39,7 +39,7 @@ data['Serial'] = getserial()
 data['Ip'] = getip()
 
 print(json.dumps(data).encode())
-request = Request(
-    'http://manufacturing.riedel.net/api/v1/testfarm/register', json.dumps(data).encode())
+# request = Request('http://manufacturing.riedel.net/api/v1/testfarm/register', json.dumps(data).encode())
+request = Request('http://192.168.0.36/api/v1/testfarm/register', json.dumps(data).encode())
 reqestreturn = urlopen(request).read().decode()
 print(reqestreturn)
