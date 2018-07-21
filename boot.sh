@@ -7,15 +7,16 @@
 
 TARGET="/opt/testfarm"
 LOG=$TARGET"/log/boot.log"
+FIRSTBLOG=$TARGET"/log/firstboot.log"
 
 if [ ! -d $TARGET/log ]; then
    mkdir $TARGET/log
-   echo 'executing firstboot.sh' > $LOG
+   echo 'executing firstboot.sh' > $FIRSTBLOG
    chmod +x $TARGET/firstboot.sh
-   . $TARGET/firstboot.sh >> $LOG
+   . $TARGET/firstboot.sh >> $FIRSTBLOG
    reboot
 else
-   echo 'executing boot' > $LOG
+   echo 'executing boot, firstboot already done' > $LOG
 fi
  
 cd $TARGET
@@ -36,7 +37,7 @@ done
 # revoke local changes. 
 # note, the reset wit revoke all local changes. This makes debuging cumbersome. So check if bittbucket is active
 git ls-remote &>-
-if [ "$?" -eq 0  ]; then
+if [ "$?" -ne 0  ]; then
    echo 'fetching repo ..' >> $LOG
    git fetch --all
    git reset --hard origin/master
