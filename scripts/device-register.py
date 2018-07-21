@@ -1,6 +1,7 @@
 import json
 import subprocess
 import os
+import pprint
 from urllib.request import Request, urlopen
 
 
@@ -38,8 +39,14 @@ for value in values:
 data['Serial'] = getserial()
 data['Ip'] = getip()
 
-print(json.dumps(data).encode())
+print("json request:")
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(data)
+# print(json.dumps(data).encode())
+
 # request = Request('http://manufacturing.riedel.net/api/v1/testfarm/register', json.dumps(data).encode())
 request = Request('http://192.168.0.36/api/v1/testfarm/register', json.dumps(data).encode())
 reqestreturn = urlopen(request).read().decode()
-print(reqestreturn)
+
+print("\njson result:")
+pp.pprint(json.loads(reqestreturn))
