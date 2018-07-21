@@ -37,7 +37,7 @@ done
 # revoke local changes. 
 # note, the reset wit revoke all local changes. This makes debuging cumbersome. So check if bittbucket is active
 git ls-remote &>-
-if [ "$?" -ne 0  ]; then
+if [ "$?" -eq 0  ]; then
    echo 'fetching repo ..' >> $LOG
    git fetch --all
    git reset --hard origin/master
