@@ -10,6 +10,8 @@ systemctl start ssh
 echo "alias ls='ls -al --color=auto'" >> /home/pi/.profile
 echo "alias ls='ls -al --color=auto'" >> /root/.profile
 
+echo "www-data ALL=(ALL) NOPASSWD: /sbin/reboot" >> /etc/sudoers
+
 echo 'MAILTO=""' | crontab -
 
 #apt-get -y upgrade
