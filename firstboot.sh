@@ -26,10 +26,13 @@ timedatectl set-timezone Europe/Berlin
 apt-get install -y nginx
 wget -q https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
 echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
+
 apt-get update
 apt-get install -y php5.6-fpm
+
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default-backup
 cp /opt/testfarm/config/default /etc/nginx/sites-available/default
+
 rm -rf /var/www/html
 mkdir /var/www/public
 

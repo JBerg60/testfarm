@@ -13,7 +13,7 @@ if [ ! -d $TARGET/log ]; then
    mkdir $TARGET/log
    echo 'executing firstboot.sh' > $FIRSTBLOG
    chmod +x $TARGET/firstboot.sh
-   . $TARGET/firstboot.sh >> $FIRSTBLOG
+   . $TARGET/firstboot.sh >> $FIRSTBLOG 2>&1
    reboot
 else
    echo 'executing boot, firstboot already done' > $LOG
@@ -48,8 +48,8 @@ chmod +x *.sh
 
 # update website of Pi
 echo 'installing pi control panel ..' >> $LOG
-yes | cp -rf $TARGET/www/* /var/www/public &> /dev/null
-rm -fR $TARGET/www &> /dev/null
+yes | cp -rf $TARGET/www/* /var/www/public >> $LOG 2>&1
+rm -fR $TARGET/www >> $LOG 2>&1
 
 # remove old watchdog -v = reverse -w wildcard, and install a new one
 echo 'installing watchdog ..' >> $LOG
